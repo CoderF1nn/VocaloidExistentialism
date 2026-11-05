@@ -1,9 +1,17 @@
-from fishaudio.utils import  save
+import logging
+import traceback
+import os
+
+from dotenv import load_dotenv, dotenv_values
+from fishaudio.utils import save
 from playsound3 import playsound
+
 from fishaudio import FishAudio
 
+load_dotenv()
+
 class model:
-    API_KEY = "a3b3f0a9c49340bd8fa722d83c81cb08"
+    API_KEY = os.getenv("FISH_API_KEY")
     def __init__(self, name, reference_id, model):
         self.name = name
         self.reference_id = reference_id
@@ -14,7 +22,16 @@ class model:
     def __str__(self):
         return self.name
 
-    def save_convert(self, filename, text, speed = 1):
+    def convert(self, filename, text, speed = 1, play = False):
+        filename = f"{filename}.mp3"
         try:
-            save(self.client.tts.convert(text=text, reference_id=self.reference_id, speed=speed, model=self.model), filename)
-        except:
+            audio = self.client.tts.convert(
+                    text=text,
+                    reference_id=self.reference_id,
+                    speed=speed,
+                    model=self.model)
+            save(audio, filename)
+            if play:
+                playsound(filename)
+        except Exception:  # noqa: BLE001
+            logging.error(traceback.format_exc())  # noqa: LOG015
