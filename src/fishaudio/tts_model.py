@@ -1,8 +1,8 @@
 import logging
-import traceback
 import os
+import traceback
 
-from dotenv import load_dotenv, dotenv_values
+from dotenv import load_dotenv
 from fishaudio.utils import save
 from playsound3 import playsound
 
