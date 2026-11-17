@@ -21,6 +21,9 @@ class llm_model:
             }
         ]
 
+    def __str__(self):
+        return f"Name: {self.name}\nPersona: {self.persona}"
+
     def transcript_app_last(self, transcript: list[dict]):
         #appends to current transcript last input
         if len(transcript) != 0 and transcript[-1]["role"] == "assistant":
@@ -40,8 +43,7 @@ class llm_model:
     def get_next(self, transcript: list[dict]):
         self.transcript_app_last(transcript)
 
-        out = llm
-        _model.PIPE(
+        out = llm_model.PIPE(
             self.formatted_messages,
             max_new_tokens=60,
             do_sample=True,

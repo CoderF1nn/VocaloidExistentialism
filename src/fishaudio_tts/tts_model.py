@@ -10,17 +10,16 @@ from fishaudio import FishAudio
 
 load_dotenv()
 
-class model:
+class tts_model:
     API_KEY = os.getenv("FISH_API_KEY")
-    def __init__(self, name, reference_id, model):
-        self.name = name
+    def __init__(self, reference_id, model):
         self.reference_id = reference_id
         self.model = model
         self.client = FishAudio(api_key = self.API_KEY)
         self.last = None
 
     def __str__(self):
-        return self.name
+        return f"Model: {self.model}"
 
     def convert(self, filename, text, speed = 1, play = False):
         filename = f"{filename}.mp3"

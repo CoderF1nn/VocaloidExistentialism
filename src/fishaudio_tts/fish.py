@@ -1,4 +1,4 @@
-from fishaudio.utils import  save
+from fishaudio.utils import save
 from playsound3 import playsound
 from fishaudio import FishAudio
 
