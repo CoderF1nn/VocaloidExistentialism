@@ -1,5 +1,6 @@
 import logging
 import os
+from pathlib import Path
 import traceback
 
 from dotenv import load_dotenv
@@ -23,6 +24,8 @@ class tts_model:
 
     def convert(self, filename, text, speed = 1, play = False):
         filename = f"{filename}.mp3"
+        path = Path(filename)
+        path.parent.mkdir(parents=True, exist_ok=True)
         try:
             audio = self.client.tts.convert(
                     text=text,

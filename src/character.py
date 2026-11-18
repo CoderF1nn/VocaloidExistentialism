@@ -29,11 +29,11 @@ class character:
         transcript.append(self.get_next_response(transcript))
         self.last_message = transcript[-1]["content"]
         self.last_message_hash = self.hash_string(self.last_message)
-        self.get_next_audio(self.last_message_hash, self.last_message)
+        self.get_next_audio(f"audio/{self.last_message_hash}", self.last_message)
         print("***********************************")
         print(f"{self.name}: {self.last_message}")
         if play:
-            playsound(f"{self.last_message_hash}.mp3")
+            playsound(f"audio/{self.last_message_hash}.mp3")
 
 
 
